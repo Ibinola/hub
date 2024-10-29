@@ -23,6 +23,7 @@ import spaceManagementIcon from "./icons/spaceManagementIcon.svg";
 import calenderIcon from "./icons/calenderIcon.svg";
 import downShortBlackArrowIcon from "./icons/downShortBlackArrowIcon.svg";
 import upShortBlackArrowIcon from "./icons/upShortBlackArrowIcon.svg";
+import hamburgerIcon from './icons/hamburgerIcon.svg'
 import user1 from "./icons/user1.svg";
 import user2 from "./icons/user2.svg";
 import user3 from "./icons/user3.svg";
@@ -34,7 +35,9 @@ import trophyIcon from "./icons/trophyIcon.svg";
 import homepage1 from './icons/homepage1.svg'
 import homepage2 from './icons/homepage2.svg'
 import homepage3 from './icons/homepage3.svg'
+import overlayBgImage from './icons/overlay-bg-image.svg'
 import question from './icons/question.svg'
+import nigeriaIcon from './icons/nigeria-icon.svg'
 
 export {
   starsIcon,
@@ -43,7 +46,10 @@ export {
   homepage2,
   homepage3,
   question,
+  nigeriaIcon,
   calenderIcon,
+  overlayBgImage,
+  hamburgerIcon,
   upShortBlackArrowIcon,
   downShortBlackArrowIcon,
   user1,

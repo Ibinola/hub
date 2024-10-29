@@ -8,11 +8,16 @@ import Users from "./pages/admin/Users";
 import Subscription from "./pages/admin/Subscription";
 import Spaces from "./pages/admin/Spaces";
 import Complaints from "./pages/admin/Complaints";
+import NewHubUser from "./pages/NewHubUser";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: '/new-user',
+    element: <NewHubUser/>
   },
   {
     path: "/dashboard",

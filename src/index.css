@@ -22,3 +22,8 @@ body {
 .punctualityGradient {
   background: linear-gradient(90deg, "red" "white", "red");
 }
+
+@font-face {
+  font-family: 'ACaslonPro'; 
+  src: url('/public/fonts/ACaslonPro-Regular.otf') format('opentype');
+}
