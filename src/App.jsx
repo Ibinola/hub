@@ -1,23 +1,40 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
-import Home from "./pages/Home";
+import Landing from "./pages/Landing";
 import AdminHome from "./pages/admin/AdminHome";
 import Monitoring from "./pages/admin/Monitoring";
 import Users from "./pages/admin/Users";
 import Subscription from "./pages/admin/Subscription";
 import Spaces from "./pages/admin/Spaces";
 import Complaints from "./pages/admin/Complaints";
-import NewHubUser from "./pages/NewHubUser";
+import NewHubUser from "./pages/newHubUsers/NewHubUser";
+import Home from "./pages/Home";
+import ClockIn from "./pages/ClockIn";
+import ClockOut from "./pages/ClockOut";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Landing />,
   },
   {
-    path: '/new-user',
-    element: <NewHubUser/>
+    path: "/new-user",
+    element: <NewHubUser />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+    children: [
+      {
+        path: "/home/clock-in",
+        element: <ClockIn />,
+      },
+      {
+        path: "/home/clock-out",
+        element: <ClockOut />,
+      },
+    ],
   },
   {
     path: "/dashboard",

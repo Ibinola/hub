@@ -24,6 +24,6 @@ body {
 }
 
 @font-face {
-  font-family: 'ACaslonPro'; 
-  src: url('/public/fonts/ACaslonPro-Regular.otf') format('opentype');
+  font-family: "ACaslonPro";
+  src: url("/public/fonts/ACaslonPro-Regular.otf") format("opentype");
 }

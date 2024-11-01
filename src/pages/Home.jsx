@@ -1,74 +1,115 @@
 import React, { useState } from "react";
+import { FiSun } from "react-icons/fi";
 import {
-  roundClockLogo,
-  homepage1,
-  homepage2,
-  homepage3,
-  question,
   hamburgerIcon,
-  overlayBgImage,
+  question,
+  roundClockLogo,
+  clock,
+  faceIdPlaceholder,
 } from "../assets";
-import { FaArrowUp } from "react-icons/fa6";
-import { IoMdClose } from "react-icons/io";
-import { IoArrowForwardOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import { IoPersonSharp } from "react-icons/io5";
+import { PiFingerprintThin } from "react-icons/pi";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
-const Home = () => {
-  const [isOpen, setIsOpen] = useState(false);
+function Home() {
+  const [toggle, setToggle] = useState("Biometric Scan");
+  const location = useLocation();
 
-  function toggleMenu() {
-    setIsOpen(!isOpen);
-  }
+  const isClockRoute =
+    location.pathname.includes("/clock-in") ||
+    location.pathname.includes("/clock-out");
 
   return (
-    <div className="p-4 mx-auto container">
+    <div className="p-4 mx-auto max-w-[1300px] h-screen flex flex-col">
       {/* Header */}
-      <header className="flex justify-between items-center p-4">
+      <header className="flex justify-between items-center p-4 mb-8">
         <img src={roundClockLogo} alt="Round o' Clock Logo" className="" />
-        <img
-          src={hamburgerIcon}
-          className="w-6 cursor-pointer"
-          onClick={toggleMenu}
-        />
+        <div className="flex gap-16 items-center">
+          <div className="bg-white text-sm rounded-full p-1 flex">
+            <button
+              onClick={() => setToggle("Biometric Scan")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+                toggle === "Biometric Scan"
+                  ? "bg-[#5C5C5B] text-white"
+                  : "bg-white text-black"
+              }`}
+            >
+              <span>
+                <PiFingerprintThin />
+              </span>
+              Biometric Scan
+            </button>
+            <button
+              onClick={() => setToggle("Face ID")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+                toggle === "Face ID"
+                  ? "bg-[#5C5C5B] text-white"
+                  : " bg-white text-black"
+              }`}
+            >
+              <span>
+                <IoPersonSharp />
+              </span>
+              Face ID
+            </button>
+          </div>
+          <img src={hamburgerIcon} className="w-6 cursor-pointer" />
+        </div>
       </header>
 
+      {!isClockRoute && <h3 className="text-end">FRI 6 SEP 10:20</h3>}
+
       {/* Main Section */}
-      <section className="mx-auto max-w-[634px] text-center mt-5 px-4">
-        {/* Welcome Message */}
-        <div>
-          <h6 className="text-[#363649] font-caslon font-medium text-4xl md:text-6xl lg:text-[80px] leading-tight">
-            Welcome to Nexus Hub
-          </h6>
-          <p className="mt-4 text-[#000000] font-semibold flex justify-center space-x-2">
-            <span>Opens 8:00AM</span> <span>|</span> <span>Closes 9:00PM</span>
-          </p>
-        </div>
+      <section className="flex flex-col lg:flex-row text-center justify-between flex-1 overflow-hidden">
+        <Outlet />
+        {!isClockRoute && (
+          <>
+            <section className="w-full lg:w-[602px]">
+              <div className="mt-10 flex flex-col items-center">
+                <img src={clock} alt="" className="" />
+                <h2 className="text-black font-bold text-2xl flex items-center gap-2">
+                  Hello, Good morning{" "}
+                  <span>
+                    <FiSun />
+                  </span>
+                </h2>
+                <p className="text-[#00000099] font-light">
+                  Use your face ID to get access in to the hub
+                </p>
+              </div>
+              <div className="mt-14 flex flex-col sm:flex-row justify-center gap-4">
+                <Link
+                  to={"/home/clock-in"}
+                  className="w-full sm:w-auto bg-[#FEDC44] py-4 sm:py-6 px-8 sm:px-16 font-semibold text-sm flex items-center justify-center gap-8"
+                >
+                  <span>
+                    <FaArrowUp />
+                  </span>{" "}
+                  Clock In
+                </Link>
+                <Link
+                  to={"/home/clock-out"}
+                  className="w-full sm:w-auto bg-[#EEEDED] py-4 sm:py-6 px-8 sm:px-16 font-semibold flex items-center justify-center text-sm gap-8"
+                >
+                  <span>
+                    <FaArrowDown />
+                  </span>{" "}
+                  Clock Out
+                </Link>
+              </div>
+            </section>
 
-        {/* Images Row */}
-        <div className="flex flex-wrap justify-center gap-4 mt-5">
-          <img
-            src={homepage1}
-            alt="Workspace 1"
-            className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40"
-          />
-          <img
-            src={homepage2}
-            alt="Workspace 2"
-            className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40"
-          />
-          <img
-            src={homepage3}
-            alt="Workspace 3"
-            className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40"
-          />
-        </div>
-
-        <button className="bg-[#FEDC44] border rounded-full w-full max-w-xs md:max-w-sm lg:max-w-[500px] mt-5 py-3 md:py-5 text-[#000000] font-semibold flex items-center justify-center gap-2 mx-auto">
-          Get In <FaArrowUp />
-        </button>
+            <section className="w-full lg:w-[602px]">
+              <div className="mt-12 items-center flex justify-center">
+                <img src={faceIdPlaceholder} alt="Face ID Placeholder" />
+              </div>
+            </section>
+          </>
+        )}
       </section>
 
-      <footer className="p-3 flex flex-col md:flex-row gap-5 justify-between mt-8">
+      <footer className=" flex flex-col md:flex-row gap-5 justify-between mt-8">
         <div className="p-5 rounded-xl w-full md:w-2/4 bg-gradient-to-r from-neutral-200 to-stone-50 text-center md:text-left">
           <p className="text-[#000000] text-sm font-bold">First time here?</p>
           <p className="text-[#5C5C5B] text-sm">
@@ -77,94 +118,16 @@ const Home = () => {
         </div>
         <div className="p-5 flex gap-3 items-center rounded-xl w-full md:w-2/4 bg-gradient-to-r from-neutral-200 to-stone-50 text-center md:text-left">
           <img src={question} className="w-9 h-9" />
-
           <div>
-            <p className="text-[#000000] text-sm font-bold"> Hub Guideline</p>
+            <p className="text-[#000000] text-sm font-bold">Hub Guideline</p>
             <p className="text-[#5C5C5B] text-sm">
               Read about our policy and operational guidelines
             </p>
           </div>
         </div>
       </footer>
-
-      {/* OVERLAY SECTION */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-gradient-to-b from-green-800 to-yellow-50 duration-300">
-          <div className="bg-transparent w-full h-full flex flex-col items-center justify-center p-8 relative">
-            <button
-              onClick={toggleMenu}
-              className="absolute top-4 right-4 text-white text-2xl"
-            >
-              <IoMdClose />
-            </button>
-            {/* Overlay Content */}
-            <div className=" w-full max-w-5xl mx-auto">
-              <div className="grid grid-cols-2 gap-8 w-full">
-                {/* Left side with image and welcome text */}
-                <div className="relative h-full">
-                  <img
-                    src={overlayBgImage}
-                    className="w-full h-full object-cover rounded-md"
-                  />
-                  <h2 className="text-[#4FA83D] text-6xl font-caslon font-normal absolute top-28 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    Welcome
-                    <br />
-                    to Nexus
-                  </h2>
-                </div>
-
-                {/* Right side content */}
-                <div className="flex flex-col gap-8">
-                  {/* Top cards container */}
-                  <div className="grid grid-cols-2 gap-8">
-                    {/* New Hub User Card */}
-                    <Link
-                      to={"/new-user"}
-                      className="bg-white rounded-md p-8 hover:scale-105 transition-transform cursor-pointer"
-                    >
-                      <h3 className="text-[#EEEEEF] font-black text-5xl mb-2">
-                        New Hub User
-                      </h3>
-                      <div className="flex justify-between items-center">
-                        <p className="text-[#434641] text-xl">
-                          New Hub <br /> User?
-                        </p>
-                        <IoArrowForwardOutline />
-                      </div>
-                    </Link>
-
-                    {/* New Staff Card */}
-                    <div className="bg-white rounded-md flex flex-col justify-between p-8 hover:scale-105 transition-transform cursor-pointer">
-                      <h3 className="text-[#EEEEEF] font-extrabold text-5xl mb-2">
-                        New Staff
-                      </h3>
-                      <div className="flex justify-between items-center">
-                        <p className="text-[#434641] text-xl">
-                          New <br /> Staff
-                        </p>
-                        <IoArrowForwardOutline />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Admin Card */}
-                  <div className="bg-white rounded-md flex flex-col gap-7 p-4 hover:scale-105 transition-transform cursor-pointer">
-                    <h3 className="text-[#EEEEEF] font-extrabold text-7xl">
-                      Admin
-                    </h3>
-                    <div className="flex justify-between items-center">
-                      <p className="text-[#434641] text-xl">Admin Login</p>
-                      <IoArrowForwardOutline />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
-};
+}
 
 export default Home;

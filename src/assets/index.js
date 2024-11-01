@@ -37,7 +37,13 @@ import homepage2 from './icons/homepage2.svg'
 import homepage3 from './icons/homepage3.svg'
 import overlayBgImage from './icons/overlay-bg-image.svg'
 import question from './icons/question.svg'
+import clock from './icons/clock.svg'
 import nigeriaIcon from './icons/nigeria-icon.svg'
+import clockedInAvatar from './icons/clockedInAvatar.svg'
+import faceIdPlaceholder from './icons/faceIdPlaceholder.svg'
+import arrivedIcon from './icons/arrivedIcon.svg'
+import bitmoji from './icons/bitmoji.svg'
+import departIcon from './icons/departIcon.svg'
 
 export {
   starsIcon,
@@ -45,13 +51,19 @@ export {
   homepage1,
   homepage2,
   homepage3,
+  bitmoji,
+  arrivedIcon,
+  clock,
   question,
+  departIcon,
   nigeriaIcon,
   calenderIcon,
+  clockedInAvatar,
   overlayBgImage,
   hamburgerIcon,
   upShortBlackArrowIcon,
   downShortBlackArrowIcon,
+  faceIdPlaceholder,
   user1,
   user2,
   user3,
